@@ -9,8 +9,12 @@
         <label class="col-sm-3 col-form-label">Producto</label>
         <div class="col-sm-9">
           <input type="text" class="form-control" placeholder="Nombre del producto"
-                  ngModel name="producto" required>
-          <span class="form-text text-danger">Debe de ser de 3 letras</span>
+                  ngModel name="producto" required minlength="3">
+          <span class="form-text text-danger"
+                *ngIf="miFormulario.controls.producto?.invalid &&
+                miFormulario.controls.producto?.touched">
+            Debe de ser de 3 letras
+          </span>
         </div>
       </div>
 
@@ -42,12 +46,40 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row mt-3">
   <div class="col">
-    <span>Valid</span>
-    <pre>{{miFormulario.valid}}</pre>
-    <br>
-    <span>Valor</span>
-    <pre>{{miFormulario.value | json}}</pre>
+
+    <div class="card mb-2 shadow-sm text-bg-primary">
+      <div class="card-body">
+        <h5 class="card-title">Valid</h5>
+        <pre class="card-text">{{miFormulario.valid}}</pre>
+      </div>
+    </div>
+
+    <div class="card mb-2 shadow-sm text-bg-success">
+      <div class="card-body">
+        <h5 class="card-title">Pristine</h5>
+        <pre class="card-text">{{miFormulario.pristine}}</pre>
+      </div>
+    </div>
+
+    <div class="card mb-2 shadow-sm text-bg-warning">
+      <div class="card-body">
+        <h5 class="card-title">Touched</h5>
+        <pre class="card-text">{{miFormulario.touched}}</pre>
+      </div>
+    </div>
+
   </div>
+
+  <div class="col">
+    <div class="card mb-2 shadow-sm text-bg-light">
+      <div class="card-body">
+        <h5 class="card-title">Valores</h5>
+        <pre class="card-text">{{miFormulario.value | json}}</pre>
+      </div>
+    </div>
+  </div>
+
+
 </div>
