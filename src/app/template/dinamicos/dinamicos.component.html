@@ -1,15 +1,24 @@
 <h2>Template: <small>Dinamicos</small></h2>
-<hr>
+<hr />
 
 <form (ngSubmit)="guardar()" autocomplete="off" #miFormulario="ngForm">
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre</label>
     <div class="col-sm-9">
-      <input class="form-control" placeholder="Nombre la persona"
-              ngModel name="nombre" required>
-      <label class="form-text text-danger"
-              *ngIf="miFormulario.controls.nombre?.errors &&
-                      miFormulario.controls.nombre?.touched">
+      <input
+        class="form-control"
+        placeholder="Nombre la persona"
+        [ngModel]="persona.nombre"
+        name="nombre"
+        required
+      />
+      <label
+        class="form-text text-danger"
+        *ngIf="
+          miFormulario.controls.nombre?.errors &&
+          miFormulario.controls.nombre?.touched
+        "
+      >
         Este campo es obligatorio
       </label>
     </div>
@@ -18,30 +27,61 @@
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Agregar</label>
     <div class="input-group">
-      <input class="form-control" placeholder="Agregar favorito "
-              ngModel name="agregar" required>
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Agregar</button>
+      <input
+        class="form-control"
+        placeholder="Agregar favorito"
+        [(ngModel)]="nuevoJuego"
+        (keyup.enter)="agregarJuego()"
+        name="nuevoJuego"
+        required
+      />
+
+      <button
+        class="btn btn-success"
+        type="button"
+        id="button-addon2"
+        (click)="agregarJuego()"
+      >
+        Agregar
+      </button>
     </div>
   </div>
 
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Favoritos</label>
     <div class="col-sm-9">
-      <input class="form-control">
-      <input class="form-control">
-      <input class="form-control">
-      <input class="form-control">
-      <input class="form-control">
+      <div
+        class="input-group mb-1"
+        *ngFor="let juego of persona.favoritos; let i = index"
+      >
+        <input
+          class="form-control"
+          [(ngModel)]="juego.nombre"
+          name="favorito_{{ i }}"
+        />
+        <button class="btn btn-danger" type="button" (click)="eliminar(i)">
+          Eliminar
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-12">
-      <button class="btn btn-primary float-end"
-              type="button" (click)="guardar()"
-              [disabled]="(miFormulario.controls.nombre?.value) ? false : true">
+      <button
+        class="btn btn-primary float-end"
+        type="button"
+        (click)="guardar()"
+      >
         Guardar
       </button>
     </div>
   </div>
 </form>
+
+<div class="card mt-2 shadow-sm text-bg-warning">
+  <div class="card-body">
+    <h5 class="card-title">Valores</h5>
+    <pre class="card-text">{{ persona | json }}</pre>
+  </div>
+</div>
