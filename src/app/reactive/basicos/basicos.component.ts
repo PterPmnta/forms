@@ -19,4 +19,11 @@ export class BasicosComponent {
   });
 
   constructor(private formBuilder: FormBuilder) {}
+
+  campoValido(campo: string) {
+    return (
+      this.basicosFormReactive.controls[campo].errors &&
+      this.basicosFormReactive.controls[campo].touched
+    );
+  }
 }
