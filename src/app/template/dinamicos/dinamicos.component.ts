@@ -17,7 +17,7 @@ interface Favorito {
   styles: [],
 })
 export class DinamicosComponent {
-  @ViewChild('miFormulario') miFormulario!: NgForm;
+  @ViewChild('formularioDinamico') formularioDinamico!: NgForm;
 
   nuevoJuego: string = '';
 
@@ -30,7 +30,7 @@ export class DinamicosComponent {
   };
 
   guardar() {
-    console.log(this.miFormulario);
+    console.log(this.formularioDinamico);
   }
 
   agregarJuego() {
