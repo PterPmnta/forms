@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -11,19 +11,37 @@ import {
   templateUrl: './basicos.component.html',
   styles: [],
 })
-export class BasicosComponent {
+export class BasicosComponent implements OnInit {
   basicosFormReactive: FormGroup = this.formBuilder.group({
-    nombre: ['RTX 4090', [Validators.required, Validators.minLength(3)]],
-    precio: [2000, [Validators.required, Validators.min(0)]],
-    existencias: [2, [Validators.required, Validators.min(0)]],
+    nombre: [, [Validators.required, Validators.minLength(3)]],
+    precio: [, [Validators.required, Validators.min(0)]],
+    existencias: [, [Validators.required, Validators.min(0)]],
   });
 
   constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+    this.basicosFormReactive.setValue({
+      nombre: 'RTX 3090Ti',
+      precio: 2000,
+      existencias: 10,
+    });
+  }
 
   campoValido(campo: string) {
     return (
       this.basicosFormReactive.controls[campo].errors &&
       this.basicosFormReactive.controls[campo].touched
     );
+  }
+
+  guardar() {
+    if (this.basicosFormReactive.invalid) {
+      this.basicosFormReactive.markAllAsTouched();
+      return;
+    }
+
+    console.log(this.basicosFormReactive);
+    this.basicosFormReactive.reset();
   }
 }
