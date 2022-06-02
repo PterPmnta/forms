@@ -3,13 +3,14 @@
 
 <div class="row">
   <div class="col">
-    <form>
+    <form autocomplete="off" [formGroup]="basicosFormReactive">
       <div class="mb-3 row">
         <label class="col-sm-3 col-form-label">Producto</label>
         <div class="col-sm-9">
           <input
             type="text"
             class="form-control"
+            formControlName="nombre"
             placeholder="Nombre del producto"
           />
           <span class="form-text text-danger"> Debe de ser de 3 letras </span>
@@ -22,6 +23,7 @@
           <input
             type="number"
             class="form-control"
+            formControlName="precio"
             placeholder="Precio del producto"
           />
           <span class="form-text text-danger">
@@ -36,6 +38,7 @@
           <input
             type="number"
             class="form-control"
+            formControlName="existencias"
             placeholder="Existencia del producto"
           />
           <!--customMin [minimo]="0"-->
@@ -58,21 +61,21 @@
     <div class="card mb-2 shadow-sm text-bg-primary">
       <div class="card-body">
         <h5 class="card-title">Valid</h5>
-        <pre class="card-text">{{ "miFormulario.valid" }}</pre>
+        <pre class="card-text">{{ basicosFormReactive.valid }}</pre>
       </div>
     </div>
 
     <div class="card mb-2 shadow-sm text-bg-success">
       <div class="card-body">
         <h5 class="card-title">Pristine</h5>
-        <pre class="card-text">{{ "miFormulario.pristine" }}</pre>
+        <pre class="card-text">{{ basicosFormReactive.pristine }}</pre>
       </div>
     </div>
 
     <div class="card mb-2 shadow-sm text-bg-warning">
       <div class="card-body">
         <h5 class="card-title">Touched</h5>
-        <pre class="card-text">{{ "miFormulario.touched" }}</pre>
+        <pre class="card-text">{{ basicosFormReactive.touched }}</pre>
       </div>
     </div>
   </div>
@@ -81,7 +84,7 @@
     <div class="card mb-2 shadow-sm text-bg-light">
       <div class="card-body">
         <h5 class="card-title">Valores</h5>
-        <pre class="card-text">{{ "miFormulario.value | json" }}</pre>
+        <pre class="card-text">{{ basicosFormReactive.value | json }}</pre>
       </div>
     </div>
   </div>
