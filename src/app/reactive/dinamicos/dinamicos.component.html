@@ -1,12 +1,22 @@
 <h2>Reactivos: <small>Dinamicos</small></h2>
 <hr />
 
-<form>
+<form
+  autocomplete="off"
+  [formGroup]="dinamicosFormReactive"
+  (ngSubmit)="guardar()"
+>
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre</label>
     <div class="col-sm-9">
-      <input class="form-control" placeholder="Nombre la persona" />
-      <label class="form-text text-danger"> Este campo es obligatorio </label>
+      <input
+        class="form-control"
+        placeholder="Nombre la persona"
+        formControlName="nombre"
+      />
+      <span class="form-text text-danger" *ngIf="campoValido('nombre')">
+        Este campo es obligatorio
+      </span>
     </div>
   </div>
 
@@ -38,7 +48,11 @@
 
   <div class="row">
     <div class="col-sm-12">
-      <button class="btn btn-primary float-end" type="button" (click)="(1)">
+      <button
+        class="btn btn-primary float-end"
+        type="submit"
+        (click)="guardar()"
+      >
         Guardar
       </button>
     </div>
@@ -48,6 +62,6 @@
 <div class="card mt-2 shadow-sm text-bg-warning">
   <div class="card-body">
     <h5 class="card-title">Valores</h5>
-    <pre class="card-text">{{ "persona | json" }}</pre>
+    <pre class="card-text">{{ dinamicosFormReactive | json }}</pre>
   </div>
 </div>
