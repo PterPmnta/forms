@@ -1,7 +1,7 @@
 <h2>Template: <small>Dinamicos</small></h2>
 <hr />
 
-<form (ngSubmit)="guardar()" autocomplete="off" #miFormulario="ngForm">
+<form (ngSubmit)="guardar()" autocomplete="off" #formularioDinamico="ngForm">
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre</label>
     <div class="col-sm-9">
@@ -15,8 +15,8 @@
       <label
         class="form-text text-danger"
         *ngIf="
-          miFormulario.controls.nombre?.errors &&
-          miFormulario.controls.nombre?.touched
+          formularioDinamico.controls.nombre?.errors &&
+          formularioDinamico.controls.nombre?.touched
         "
       >
         Este campo es obligatorio
