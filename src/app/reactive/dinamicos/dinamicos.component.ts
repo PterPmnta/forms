@@ -63,5 +63,11 @@ export class DinamicosComponent implements OnInit {
     this.favoritosArr.push(
       this.formBuilder.control(this.nuevoFavorito.value, Validators.required)
     );
+
+    this.nuevoFavorito.reset();
+  }
+
+  eliminar(index: number) {
+    this.favoritosArr.removeAt(index);
   }
 }

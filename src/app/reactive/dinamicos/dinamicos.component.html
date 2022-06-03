@@ -43,7 +43,7 @@
         *ngFor="let favorito of favoritosArr.controls; let i = index"
       >
         <input class="form-control" [formControlName]="i" />
-        <button class="btn btn-danger" type="button" (click)="(1)">
+        <button class="btn btn-danger" type="button" (click)="eliminar(i)">
           Eliminar
         </button>
       </div>
@@ -63,6 +63,7 @@
   </div>
 </form>
 
+<!--Cards data-->
 <div class="row justify-content-around">
   <div class="card mt-2 shadow-sm text-bg-success col-5">
     <div class="card-body">
