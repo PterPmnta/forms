@@ -25,10 +25,11 @@
     <div class="input-group">
       <input
         class="form-control"
+        [formControl]="nuevoFavorito"
         placeholder="Agregar favorito"
-        (keyup.enter)="(1)"
+        (keyup.enter)="agregarFavorito()"
       />
-      <button class="btn btn-success" type="button" (click)="(1)">
+      <button class="btn btn-success" type="button" (click)="agregarFavorito()">
         Agregar
       </button>
     </div>
@@ -36,9 +37,12 @@
 
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Favoritos</label>
-    <div class="col-sm-9">
-      <div class="input-group mb-1">
-        <input class="form-control" />
+    <div class="col-sm-9" formArrayName="favoritos">
+      <div
+        class="input-group mb-1"
+        *ngFor="let favorito of favoritosArr.controls; let i = index"
+      >
+        <input class="form-control" [formControlName]="i" />
         <button class="btn btn-danger" type="button" (click)="(1)">
           Eliminar
         </button>
@@ -59,9 +63,34 @@
   </div>
 </form>
 
-<div class="card mt-2 shadow-sm text-bg-warning">
-  <div class="card-body">
-    <h5 class="card-title">Valores</h5>
-    <pre class="card-text">{{ dinamicosFormReactive | json }}</pre>
+<div class="row justify-content-around">
+  <div class="card mt-2 shadow-sm text-bg-success col-5">
+    <div class="card-body">
+      <h5 class="card-title">Valid</h5>
+      <pre class="card-text">{{ dinamicosFormReactive.valid }}</pre>
+    </div>
+  </div>
+
+  <div class="card mt-2 shadow-sm text-bg-warning col-5">
+    <div class="card-body">
+      <h5 class="card-title">Value</h5>
+      <pre class="card-text">{{ dinamicosFormReactive.value | json }}</pre>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-around">
+  <div class="card mt-2 shadow-sm text-bg-primary col-5">
+    <div class="card-body">
+      <h5 class="card-title">Valid games</h5>
+      <pre class="card-text">{{ nuevoFavorito.valid }}</pre>
+    </div>
+  </div>
+
+  <div class="card mt-2 shadow-sm text-bg-info col-5">
+    <div class="card-body">
+      <h5 class="card-title">Add games</h5>
+      <pre class="card-text"> Juego: {{ nuevoFavorito.value | json }}</pre>
+    </div>
   </div>
 </div>
