@@ -1,1 +1,104 @@
-<p>basicos works!</p>
+<h2>Reactivos: <small>Basicos</small></h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form
+      (ngSubmit)="guardar()"
+      autocomplete="off"
+      [formGroup]="basicosFormReactive"
+    >
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombre"
+            placeholder="Nombre del producto"
+          />
+          <span class="form-text text-danger" *ngIf="campoValido('nombre')">
+            Debe de ser de 3 letras
+          </span>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            formControlName="precio"
+            placeholder="Precio del producto"
+          />
+          <span class="form-text text-danger" *ngIf="campoValido('precio')">
+            El precio debe ser mayor a cero
+          </span>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Existencia</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            formControlName="existencias"
+            placeholder="Existencia del producto"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="campoValido('existencias')"
+          >
+            La existencia debe ser mayor a cero
+          </span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end">
+            <!--[disabled]="basicosFormReactive.invalid"-->
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--Cards Data-->
+<div class="row mt-3">
+  <div class="col">
+    <div class="card mb-2 shadow-sm text-bg-primary">
+      <div class="card-body">
+        <h5 class="card-title">Valid</h5>
+        <pre class="card-text">{{ basicosFormReactive.valid }}</pre>
+      </div>
+    </div>
+
+    <div class="card mb-2 shadow-sm text-bg-success">
+      <div class="card-body">
+        <h5 class="card-title">Pristine</h5>
+        <pre class="card-text">{{ basicosFormReactive.pristine }}</pre>
+      </div>
+    </div>
+
+    <div class="card mb-2 shadow-sm text-bg-warning">
+      <div class="card-body">
+        <h5 class="card-title">Touched</h5>
+        <pre class="card-text">{{ basicosFormReactive.touched }}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card mb-2 shadow-sm text-bg-light">
+      <div class="card-body">
+        <h5 class="card-title">Valores</h5>
+        <pre class="card-text">{{ basicosFormReactive.value | json }}</pre>
+      </div>
+    </div>
+  </div>
+</div>

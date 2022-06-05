@@ -1,1 +1,97 @@
-<p>dinamicos works!</p>
+<h2>Reactivos: <small>Dinamicos</small></h2>
+<hr />
+
+<form
+  autocomplete="off"
+  [formGroup]="dinamicosFormReactive"
+  (ngSubmit)="guardar()"
+>
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <input
+        class="form-control"
+        placeholder="Nombre la persona"
+        formControlName="nombre"
+      />
+      <span class="form-text text-danger" *ngIf="campoValido('nombre')">
+        Este campo es obligatorio
+      </span>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="input-group">
+      <input
+        class="form-control"
+        [formControl]="nuevoFavorito"
+        placeholder="Agregar favorito"
+        (keyup.enter)="agregarFavorito()"
+      />
+      <button class="btn btn-success" type="button" (click)="agregarFavorito()">
+        Agregar
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label">Favoritos</label>
+    <div class="col-sm-9" formArrayName="favoritos">
+      <div
+        class="input-group mb-1"
+        *ngFor="let favorito of favoritosArr.controls; let i = index"
+      >
+        <input class="form-control" [formControlName]="i" />
+        <button class="btn btn-danger" type="button" (click)="eliminar(i)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button
+        class="btn btn-primary float-end"
+        type="submit"
+        (click)="guardar()"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<!--Cards data-->
+<div class="row justify-content-around">
+  <div class="card mt-2 shadow-sm text-bg-success col-5">
+    <div class="card-body">
+      <h5 class="card-title">Valid</h5>
+      <pre class="card-text">{{ dinamicosFormReactive.valid }}</pre>
+    </div>
+  </div>
+
+  <div class="card mt-2 shadow-sm text-bg-warning col-5">
+    <div class="card-body">
+      <h5 class="card-title">Value</h5>
+      <pre class="card-text">{{ dinamicosFormReactive.value | json }}</pre>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-around">
+  <div class="card mt-2 shadow-sm text-bg-primary col-5">
+    <div class="card-body">
+      <h5 class="card-title">Valid games</h5>
+      <pre class="card-text">{{ nuevoFavorito.valid }}</pre>
+    </div>
+  </div>
+
+  <div class="card mt-2 shadow-sm text-bg-info col-5">
+    <div class="card-body">
+      <h5 class="card-title">Add games</h5>
+      <pre class="card-text"> Juego: {{ nuevoFavorito.value | json }}</pre>
+    </div>
+  </div>
+</div>

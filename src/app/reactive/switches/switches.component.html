@@ -1,1 +1,127 @@
-<p>switches works!</p>
+<h2>Reactivos: <small>Switches</small></h2>
+<hr />
+
+<form
+  autocomplete="off"
+  [formGroup]="reactiveSwitchesForm"
+  (ngSubmit)="guardar()"
+>
+  <!--Radio Buttons-->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label"> Genero </label>
+    <div class="col-sm-9 mb-3">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="M"
+          name="genero"
+          formControlName="genero"
+          id="radioMasculino"
+        />
+        <label class="form-check-label" for="radioMasculino"> Masculino </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="F"
+          name="genero"
+          formControlName="genero"
+          id="radioFemenino"
+          checked
+        />
+        <label class="form-check-label" for="radioFemenino"> Femenino </label>
+      </div>
+    </div>
+  </div>
+
+  <!--Switches-->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label"> Notificaciones </label>
+    <div class="col-sm-9">
+      <div class="form-check form-switch mt-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="notificaciones"
+          formControlName="notificaciones"
+        />
+        <label class="form-check-label" for="notificaciones">
+          Deseo recibir notificaciones
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!--Check-->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label"> Terminos y condiciones </label>
+    <div class="col-sm-9">
+      <div class="form-check mt-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          formControlName="condiciones"
+          id="condicion"
+          required
+        />
+        <label class="form-check-label" for="condicion">
+          Terminos y condiciones de uso
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!--Button-->
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary float-end" type="submit">Guardar</button>
+    </div>
+  </div>
+</form>
+
+<!--Cards Data-->
+<div class="row mt-3">
+  <div class="col">
+    <div class="card mb-2 shadow-sm text-bg-primary">
+      <div class="card-body">
+        <h5 class="card-title">Valid</h5>
+        <pre class="card-text">{{ reactiveSwitchesForm.valid }}</pre>
+      </div>
+    </div>
+
+    <div class="card mb-2 shadow-sm text-bg-success">
+      <div class="card-body">
+        <h5 class="card-title">Pristine</h5>
+        <pre class="card-text">{{ reactiveSwitchesForm.pristine }}</pre>
+      </div>
+    </div>
+
+    <div class="card mb-2 shadow-sm text-bg-warning">
+      <div class="card-body">
+        <h5 class="card-title">Terminos y condiciones</h5>
+        <pre class="card-text">
+          {{ "switchesForm.controls?.terminos?.errors | json" }}
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card mb-2 shadow-sm text-bg-light">
+      <div class="card-body">
+        <h5 class="card-title">Valores</h5>
+        <pre class="card-text">{{ reactiveSwitchesForm.value | json }}</pre>
+      </div>
+    </div>
+
+    <div class="card mb-2 shadow-sm text-bg-light">
+      <div class="card-body">
+        <h5 class="card-title">Persona data</h5>
+        <pre class="card-text">{{ persona | json }}</pre>
+      </div>
+    </div>
+  </div>
+</div>
