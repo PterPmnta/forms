@@ -47,8 +47,12 @@
           <input
             type="text"
             class="form-control"
+            formControlName="username"
             placeholder="Nombre del usuario"
           />
+          <span class="form-text text-danger" *ngIf="campoNoValido('email')">
+            El username no puede ser strider
+          </span>
         </div>
       </div>
 
@@ -82,3 +86,6 @@
 
 <h4>Nombre</h4>
 <pre>{{ registroForm.controls.nombre.errors | json }}</pre>
+
+<h4>Username</h4>
+<pre>{{ registroForm.controls.username.errors | json }}</pre>

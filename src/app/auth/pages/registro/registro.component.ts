@@ -1,28 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { ValidatorService } from '../../../shared/validator/validator.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styles: [],
 })
 export class RegistroComponent implements OnInit {
-  nombreApellidoPattern: string = '([a-zA-Z]+) ([a-zA-Z]+)';
-  emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
-
   registroForm: FormGroup = this.formBuilder.group({
     nombre: [
       '',
-      [Validators.required, Validators.pattern(this.nombreApellidoPattern)],
+      [
+        Validators.required,
+        Validators.pattern(this.validatorService.nombreApellidoPattern),
+      ],
     ],
-    email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+    email: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(this.validatorService.emailPattern),
+      ],
+    ],
+    username: [
+      '',
+      [Validators.required, this.validatorService.noPuedeSerStrider],
+    ],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private validatorService: ValidatorService
+  ) {}
 
   ngOnInit(): void {
     this.registroForm.reset({
       nombre: 'Pedro Pimienta',
+      email: 'form_section@angular.dev',
+      username: 'pterpmntam',
     });
   }
 
