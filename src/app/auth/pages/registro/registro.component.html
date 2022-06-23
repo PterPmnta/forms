@@ -60,7 +60,15 @@
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Password</label>
         <div class="col-sm-9">
-          <input type="password" class="form-control" placeholder="Password" />
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <span class="form-text text-danger" *ngIf="campoNoValido('password')">
+            La contraseña debe tener al menos 6 caracteres.
+          </span>
         </div>
       </div>
 
@@ -68,7 +76,18 @@
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Confirmar Password</label>
         <div class="col-sm-9">
-          <input type="password" class="form-control" placeholder="Password" />
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password_2"
+            placeholder="Password"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="campoNoValido('password_2')"
+          >
+            Las contraseñas deben ser iguales
+          </span>
         </div>
       </div>
 
@@ -84,8 +103,18 @@
 <h4>Form valid: {{ registroForm.valid }}</h4>
 <br />
 
+<h4>Form erros</h4>
+<pre>{{ registroForm.errors | json }}</pre>
+<br />
+
 <h4>Nombre</h4>
 <pre>{{ registroForm.controls.nombre.errors | json }}</pre>
 
 <h4>Username</h4>
 <pre>{{ registroForm.controls.username.errors | json }}</pre>
+
+<h4>Password</h4>
+<pre>{{ registroForm.controls.password.errors | json }}</pre>
+
+<h4>Confirmar</h4>
+<pre>{{ registroForm.controls.password_2.errors | json }}</pre>

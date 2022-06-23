@@ -12,26 +12,35 @@ import {
   styles: [],
 })
 export class RegistroComponent implements OnInit {
-  registroForm: FormGroup = this.formBuilder.group({
-    nombre: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(this.validatorService.nombreApellidoPattern),
+  registroForm: FormGroup = this.formBuilder.group(
+    {
+      nombre: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.validatorService.nombreApellidoPattern),
+        ],
       ],
-    ],
-    email: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(this.validatorService.emailPattern),
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.validatorService.emailPattern),
+        ],
       ],
-    ],
-    username: [
-      '',
-      [Validators.required, this.validatorService.noPuedeSerStrider],
-    ],
-  });
+      username: [
+        '',
+        [Validators.required, this.validatorService.noPuedeSerStrider],
+      ],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      password_2: ['', [Validators.required]],
+    },
+    {
+      validators: [
+        this.validatorService.validatePassword('password', 'password_2'),
+      ],
+    }
+  );
 
   constructor(
     private formBuilder: FormBuilder,
